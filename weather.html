@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>Weather App</title>
+
+    <style>
+      body {
+        background-color: #141414;
+        background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEyMCc+Cgk8ZGVmcz4KCQk8cGF0dGVybiBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBpZD0nYycgd2lkdGg9JzYwJyBoZWlnaHQ9JzEyMCcgeD0nMCcgeT0nMCcgdmlld0JveD0nMCAwIDUgMTAnPgoJCQk8cGF0aCBmaWxsLW9wYWNpdHk9JzAnIHN0cm9rZT0nIzI5MjkyOScgc3Ryb2tlLXdpZHRoPScwLjA5JyBkPSdNLTIsMUw3LDEwTS0yLDZMNywxNU0tMiwtNEw3LDUnLz4KCQk8L3BhdHRlcm4+CgkJPHBhdHRlcm4gcGF0dGVyblVuaXRzPSd1c2VyU3BhY2VPblVzZScgaWQ9J2MyJyB3aWR0aD0nNjAnIGhlaWdodD0nMTIwJyB4PScxMDAlJyB5PScwJyB2aWV3Qm94PScwIDAgNSAxMCc+CgkJCTxwYXRoIGZpbGwtb3BhY2l0eT0nMCcgc3Ryb2tlPScjMjkyOTI5JyBzdHJva2Utd2lkdGg9JzAuMDknIGQ9J003LDFMLTIsMTBNNyw2TC0yLDE1TTcsLTRMLTIsNScvPgoJCTwvcGF0dGVybj4KCTwvZGVmcz4KCTxyZWN0IHdpZHRoPSc1MCUnIGhlaWdodD0nMTAwJScgZmlsbD0ndXJsKCNjKScvPgoJPHJlY3QgeD0nNTAlJyB3aWR0aD0nNTAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9J3VybCgjYzIpJy8+Cjwvc3ZnPg==');
+      }
+
+      .col {
+        transition: transform .2s; /* Animation */
+      }
+
+      .col:hover {
+        transform: scale(1.1); /* (110% zoom) */
+      }
+    </style>
+  </head>
+
+  <body onload="fetch()">
+    <div class="container" style="text-align: center;">
+        <h2 class="jumbotron" style="margin: 20px;">5-Day Weather Forecast</h2>
+        <h5 style="text-align: center; font-family:'Trebuchet MS', sans-serif; color:ghostwhite; margin:20px">Bengaluru, India</h5>
+        <div class="row">
+            <div class="col card shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem; margin:20px">
+                <div class="card-body">
+                  <h5 class="font-weight-bold mb-3" id="day1">Day 1</h5>
+                  <p class="mb-0" id="date1">Placeholder</p>
+                  <img alt="Icon" id="img1"></img>
+                  <h4 class="font-weight-bold mb-3" id="temp1">Temp</h4>
+                  <p class="mb-0" id="desc1">Description</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" id="low1">Low</li>
+                  <li class="list-group-item" id="high1">High</li>
+                  <li class="list-group-item" id="wind1">Wind</li>
+                  <li class="list-group-item" id="humidity1">Humidity</li>
+                </ul>
+            </div>
+
+            <div class="col card shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem; margin:20px">
+              <div class="card-body">
+                <h5 class="font-weight-bold mb-3" id="day2">Day 2</h5>
+                <p class="mb-0" id="date2">Placeholder</p>
+                <img alt="Icon" id="img2"></img>
+                <h4 class="font-weight-bold mb-3" id="temp2">Temp</h4>
+                <p class="mb-0" id="desc2">Description</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="low2">Low</li>
+                <li class="list-group-item" id="high2">High</li>
+                <li class="list-group-item" id="wind2">Wind</li>
+                <li class="list-group-item" id="humidity2">Humidity</li>
+              </ul>
+          </div>
+
+          <div class="col card shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem; margin:20px">
+            <div class="card-body">
+              <h5 class="font-weight-bold mb-3" id="day3">Day 3</h5>
+              <p class="mb-0" id="date3">Placeholder</p>
+              <img alt="Icon" id="img3"></img>
+              <h4 class="font-weight-bold mb-3" id="temp3">Temp</h4>
+              <p class="mb-0" id="desc3">Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="low3">Low</li>
+              <li class="list-group-item" id="high3">High</li>
+              <li class="list-group-item" id="wind3">Wind</li>
+              <li class="list-group-item" id="humidity3">Humidity</li>
+            </ul>
+          </div>
+
+          <div class="col card shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem; margin:20px">
+            <div class="card-body">
+              <h5 class="font-weight-bold mb-3" id="day4">Day 4</h5>
+              <p class="mb-0" id="date4">Placeholder</p>
+              <img alt="Icon" id="img4"></img>
+              <h4 class="font-weight-bold mb-3" id="temp4">Temp</h4>
+              <p class="mb-0" id="desc4">Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="low4">Low</li>
+              <li class="list-group-item" id="high4">High</li>
+              <li class="list-group-item" id="wind4">Wind</li>
+              <li class="list-group-item" id="humidity4">Humidity</li>
+            </ul>
+          </div>
+
+          <div class="col card shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem; margin:20px">
+            <div class="card-body">
+              <h5 class="font-weight-bold mb-3" id="day5">Day 5</h5>
+              <p class="mb-0" id="date5">Placeholder</p>
+              <img alt="Icon" id="img5"></img>
+              <h4 class="font-weight-bold mb-3" id="temp5">Temp</h4>
+              <p class="mb-0" id="desc5">Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="low5">Low</li>
+              <li class="list-group-item" id="high5">High</li>
+              <li class="list-group-item" id="wind5">Wind</li>
+              <li class="list-group-item" id="humidity5">Humidity</li>
+            </ul>
+          </div>
+
+        </div>
+    </div>
+    <div class="container" id="demo"></div>
+  </body>
+</html>
+
+<script>
+  function fetch()
+  {
+    console.log("Fetching Weather Forecast using API call");
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var arr = this.response;
+        var i;
+        for(i=1;i<6;i++)
+        {
+          var suffix = i.toString();
+
+          // Displaying the Day and Date
+          var a = new Date(arr.list[i].dt * 1000);
+          var months = ['January','Februar','March','April','May','June','July','August','September','October','November','December'];
+          var day = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+          var year = a.getFullYear();
+          var month = months[a.getMonth()];
+          var date = a.getDate();
+          var hour = a.getHours();
+          var min = a.getMinutes();
+          var sec = a.getSeconds();
+          var time = date + ' ' + month + ' ' + year;
+          document.getElementById("day"+suffix).innerHTML = day[a.getDay()]; 
+          document.getElementById("date"+suffix).innerHTML = time;
+
+          //Displaying Weather Image
+          document.getElementById("img"+suffix).src = "http://openweathermap.org/img/wn/" + arr.list[i].weather[0].icon + "@2x.png";
+          document.getElementById("temp"+suffix).innerHTML = arr.list[i].temp.day.toString() + ' &deg;C' ;
+          // Changing first letter of description to uppercase.
+          var string = arr.list[i].weather[0].description;
+          document.getElementById("desc"+suffix).innerHTML = string.charAt(0).toUpperCase() + string.slice(1);
+
+          document.getElementById("low"+suffix).innerHTML = "Min: " + arr.list[i].temp.min.toString() + ' &deg;C';
+          document.getElementById("high"+suffix).innerHTML = "Max: "+ arr.list[i].temp.max.toString() + ' &deg;C';
+          document.getElementById("wind"+suffix).innerHTML = "Wind: " + arr.list[i].speed.toString() + " m/s";
+          document.getElementById("humidity"+suffix).innerHTML = "Humidity: " + arr.list[i].humidity.toString() + " %";
+        }
+      }
+    };
+    xhr.open("GET","http://api.openweathermap.org/data/2.5/forecast/daily?q=Bengaluru&cnt=6&units=metric&appid=d78ddf01b7083fe2d7f2bc0bb6c282eb",true);
+    xhr.send();
+  }
+  setInterval(fetch, 300000);
+</script>
+
+
+
+
+
+
